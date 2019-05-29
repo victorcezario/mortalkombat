@@ -5,16 +5,13 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
-	<title>Lista de Jogadores</title>
+	<title>Lista de Personagens</title>
 </h:head>
 <h:body>
 	<h:form>
-		<p:dataTable var="j" value="#{JogadorView.jogadores}">
+		<p:dataTable var="p" value="#{PersonagemView.personagem}">
 			<p:column headerText="Nome">
-				<h:outputText value="#{j.nome}" />
-			</p:column>
-			<p:column headerText="Apelido">
-				<h:outputText value="#{j.apelido}" />
+				<h:outputText value="#{p.nome}" />
 			</p:column>
 		</p:dataTable>
 	</h:form>

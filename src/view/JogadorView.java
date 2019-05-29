@@ -19,20 +19,11 @@ public class JogadorView {
 		
 		return jogadores;
 		
-		
 	}
 	@PostConstruct
 	public void init() {
 		
 		try {
-			Jogador jog = new Jogador();
-			jog.setApelido("Victor");
-			jog.setNome("Victor Cezario");
-			jog.setPais("Brasil");
-
-			new JogadorController();
-			JogadorController.Cadastrar(jog);
-			
 			jogadores = new JogadorController().Listar();
 		} catch (Exception e) {
 			e.printStackTrace();
