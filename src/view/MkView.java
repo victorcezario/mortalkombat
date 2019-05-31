@@ -6,28 +6,42 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import controller.*;
-import model.*;
+import controller.JogadorController;
+import controller.PersonagemController;
+import model.Jogador;
+import model.Personagem;
 
-@ManagedBean(name = "PersonagemView")
+@ManagedBean(name = "MkView")
 @ViewScoped
 
-public class PersonagemView {
+public class MkView {
+
 	private List<Personagem> personagens;
-	
-	public List<Personagem> getPersonagem(){
-		
+
+	public List<Personagem> getPersonagem() {
+
 		return personagens;
 
 	}
+
+	private List<Jogador> jogadores;
+
+	public List<Jogador> getJogadores() {
+
+		return jogadores;
+
+	}
+
 	@PostConstruct
 	public void init() {
-		
+
 		try {
 			personagens = new PersonagemController().Listar();
+			jogadores = new JogadorController().Listar();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
+
 }
