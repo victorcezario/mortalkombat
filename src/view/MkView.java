@@ -1,5 +1,10 @@
 package view;
 
+import java.applet.Applet;
+import java.applet.AudioClip;
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -31,7 +36,7 @@ public class MkView {
 		return jogadores;
 
 	}
-
+	
 	@PostConstruct
 	public void init() {
 

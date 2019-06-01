@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Mortal Kombat - Page Title</title>
+	<h:outputStylesheet library="css" name="style.css" />
+
+</h:head>
+<h:body>
+<style type="text/css">
+    .value {
+        font-weight: bold;
+    }
+</style>
+ 
+ 
+<h:form id="form">
+    <p:dataGrid var="personagem" value="#{MkView.personagem}" columns="3" layout="grid"
+        rows="12" paginator="true" id="personagens"
+        >
+         
+        <f:facet name="header">
+            MK - Personagens
+        </f:facet>
+ 
+        <p:panel header="#{personagem.nome}" style="text-align:center">
+            <h:panelGrid columns="1" style="width:100%">
+                <p:graphicImage library="images/personagens" name="#{personagem.idPersonagem}.jpeg"/> 
+ 
+                <h:outputText value="#{personagem.nome}" />
+
+            </h:panelGrid>
+        </p:panel>
+ 
+    </p:dataGrid>
+</h:form>
+</h:body>
+
+</html>
