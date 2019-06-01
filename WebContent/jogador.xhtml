@@ -18,14 +18,15 @@
 					<h:graphicImage library="images" name="logo.png" height="32" />
 				</h:link>
 			</p:menuitem>
-			<p:menuitem value="Inicio" url="#" icon="fa fa-home" />
+			<p:menuitem value="Inicio" url="index.xhtml" icon="fa fa-home" />
 			<p:menuitem value="Partidas" url="#" icon="fa fa-trophy" />
 			<p:menuitem value="Personagens" url="#" icon="fa fa-heart" />
+			<p:menuitem value="Jogadores" url="jogador.xhtml" icon="fa fa-people" />
 		</p:menubar>
 	</h:form>
 <div class="content">
 	<h1 style="font-family:'MortalKombat';text-align:center;">Jogadores</h1>
-	<p:dataTable var="jogador" value="#{dtBasicView.cars}">
+	<p:dataTable id="jogadorTable" var="jogador" value="#{MkView.jogadores}">
     <p:column headerText="Nome">
         <h:outputText value="#{jogador.nome}" />
     </p:column>
@@ -35,22 +36,29 @@
     </p:column>
  
     <p:column headerText="Pais">
-        <h:outputText value="#{jogador.Pais}" />
+        <h:outputText value="#{jogador.pais}" />
     </p:column>
  
 </p:dataTable>
+
+<h:form id="jogadorForm" enctype="multipart/form-data" prependId="false">
 <div style="margin: 10px;" align="center">
 	<p:commandButton value="Cadastrar novo jogador" type="button" onclick="PF('dlg2').show();" style="color:white;align:center;height:50px" />
 </div>
-<p:dialog header="Cadastrar novo jogador" widgetVar="dlg2" modal="true" height="200" width="400">
-    <h:outputText value="Nome do Jogador." /> <br />
-    <p:inputText style="color:white" /><br />
-    <h:outputText value="Apelido." /> <br />
-    <p:inputText style="color:white"/><br />
-    <h:outputText value="Pais." /> <br />
-    <p:inputText style="color:white"/><br /><br />
-     <p:commandButton value="Cadastrar novo jogador" style="color:white; height:50px" type="submit"/>
+<p:dialog header="Cadastrar novo jogador" widgetVar="dlg2" modal="true" height="200" width="400" onHide="refreshTable();">
+    <h:outputText value="Nome do Jogador: " for="nome"/> <br />
+    <p:inputText style="color:white" value="#{jogador.nome}" id="nome" /><br />
+    <h:outputText value="Apelido:" /> <br />
+    <p:inputText style="color:white" value="#{jogador.apelido}" id="apelido"/><br />
+    <h:outputText value="Pais:" /> <br />
+    <p:inputText style="color:white" value="#{jogador.pais}" id="pais" /><br /><br />
+    <p:commandButton value="Cadastrar novo jogador" 
+    			style="color:white; height:50px"
+    			update="jogadorForm"
+    			action="#{jogador.Cadastrar}"
+             	/>
 </p:dialog>  
+</h:form>
 </div>
 </h:body>
 

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Lista de Personagens</title>
+</h:head>
+<h:body>
+	<h:form>
+		<p:dataTable var="p" value="#{MkView.jogadores}">
+			<p:column headerText="Nome">
+				<h:outputText value="#{p.nome}" />
+			</p:column>
+			[<p:column headerText="Apelido">
+				<h:outputText value="#{p.apelido}" />
+			</p:column>
+			<p:column headerText="Pais">
+				<h:outputText value="#{p.pais}" />
+			</p:column>
+		</p:dataTable>
+	</h:form>
+</h:body>
+</html>

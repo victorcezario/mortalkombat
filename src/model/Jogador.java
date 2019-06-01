@@ -1,14 +1,25 @@
 package model;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Persistence;
 import javax.persistence.Table;
+
+@ManagedBean(name = "jogador")
+@RequestScoped
 
 @Entity
 @Table(name = "Jogador")
 public class Jogador {
+	private static EntityManagerFactory manager = 
+			Persistence.createEntityManagerFactory("MortalKombat"); 
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idJogador;
@@ -56,5 +67,10 @@ public class Jogador {
 	}
 	public Jogador() { }
 	
-	
+	public void Cadastrar() {
+		EntityManager entitymanager = manager.createEntityManager();
+		entitymanager.getTransaction().begin();
+		entitymanager.persist(this);
+		entitymanager.getTransaction().commit();
+	}
 }
