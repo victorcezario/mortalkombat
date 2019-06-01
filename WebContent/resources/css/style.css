@@ -1,0 +1,74 @@
+@font-face {
+font-family: MortalKombat;
+src: url("#{resource['css:mkmyth.eot']}");
+src: url("#{resource['css:mkmyth.eot?']}?#iefix") format('eot'),
+     url("#{resource['css:mkmyth.woff']}") format('woff'),
+     url("#{resource['css:mkmyth.ttf']}") format('truetype'),
+     url("#{resource['css:mkmyth.svg#MortalKombatMythologies']}#WebSymbolsRegular") format('svg');
+}
+
+body{
+	background-image: url("https://wallpapersite.com/images/pages/pic_w/2.jpg");
+	background-repeat: no-repeat;
+  	background-position: center center;
+  	background-size: cover;
+  	background-attachment: fixed;
+}
+.ui-menu{
+	height:50;
+}
+.ui-menu.ui-menubar{
+	background-image: linear-gradient(to right, #000000, #fbaa01);
+	background-color: #000000;
+	border: none;
+	color: white;
+	position: fixed;
+	top: 0;
+	width: 100%;
+}
+.ui-menu.ui-widget a{
+	color: white;
+}
+.ui-dialog.ui-widget-content .ui-dialog-titlebar{
+	background-color: rgb(30,30,30);
+	color: white;
+	
+}
+
+.ui-widget-content .ui-inputfield{
+	color: white;
+}
+.ui-dialog.ui-widget-content .ui-dialog-content{
+	background-color: rgb(78,78,78);
+	color: white;
+}
+.ui-menu.ui-widget a:hover{
+	background-color: green;
+}
+.ui-menu.ui-widget li.ui-corner-all, .ui-menu.ui-widget a.ui-corner-all{
+	display: inline-flex;
+	margin-left: 5px;
+	margin-right: 5px;
+	padding-left: 3px;
+	padding-right: 3px;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default{
+	color: rgb(0,0,0);
+	background-image: linear-gradient(to bottom, rgb(30,30,30), rgb(18,18,18));
+	background-color: rgb(18,18,18);
+	border: none;
+}
+.ui-column-title{
+	color: rgb(253,168,15);
+}
+.ui-widget-content{
+	background-color:rgba(58,58,58,0.7);
+	color: white;
+	border: 1px solid #black;
+}
+
+.content{
+	padding: 10px 10px 10px 10px;
+	background-color: rgba(0,0,0,.4);height:600px;margin-top: 60px;color:white;  border-top: 5px solid #fbaa01;
+}

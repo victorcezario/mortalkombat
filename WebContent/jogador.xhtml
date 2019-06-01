@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Mortal Kombat - Page Title</title>
+	<h:outputStylesheet library="css" name="style.css" />
+
+</h:head>
+<h:body>
+	<h:form>
+		<p:growl id="messages" />
+		<p:menubar>
+			<p:menuitem>
+				<h:link outcome="/index.xhmtl">
+					<h:graphicImage library="images" name="logo.png" height="32" />
+				</h:link>
+			</p:menuitem>
+			<p:menuitem value="Inicio" url="#" icon="fa fa-home" />
+			<p:menuitem value="Partidas" url="#" icon="fa fa-trophy" />
+			<p:menuitem value="Personagens" url="#" icon="fa fa-heart" />
+		</p:menubar>
+	</h:form>
+<div class="content">
+	<h1 style="font-family:'MortalKombat';text-align:center;">Jogadores</h1>
+	<p:dataTable var="jogador" value="#{dtBasicView.cars}">
+    <p:column headerText="Nome">
+        <h:outputText value="#{jogador.nome}" />
+    </p:column>
+ 
+    <p:column headerText="Apelido">
+        <h:outputText value="#{jogador.apelido}" />
+    </p:column>
+ 
+    <p:column headerText="Pais">
+        <h:outputText value="#{jogador.Pais}" />
+    </p:column>
+ 
+</p:dataTable>
+<div style="margin: 10px;" align="center">
+	<p:commandButton value="Cadastrar novo jogador" type="button" onclick="PF('dlg2').show();" style="color:white;align:center;height:50px" />
+</div>
+<p:dialog header="Cadastrar novo jogador" widgetVar="dlg2" modal="true" height="200" width="400">
+    <h:outputText value="Nome do Jogador." /> <br />
+    <p:inputText style="color:white" /><br />
+    <h:outputText value="Apelido." /> <br />
+    <p:inputText style="color:white"/><br />
+    <h:outputText value="Pais." /> <br />
+    <p:inputText style="color:white"/><br /><br />
+     <p:commandButton value="Cadastrar novo jogador" style="color:white; height:50px" type="submit"/>
+</p:dialog>  
+</div>
+</h:body>
+
+</html>
