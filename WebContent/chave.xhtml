@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Lista de Chaves</title>
+</h:head>
+<h:body>
+	<h:form>
+
+
+		<p:dataTable id="jogadorTable" var="jogador"
+			value="#{chaveView.jogadores}">
+			<p:column headerText="Nome">
+				<h:outputText value="#{jogador.nome}" />
+			</p:column>
+		</p:dataTable>
+
+		<p:orderList value="#{chaveView.jogadores}" var="jg"
+			controlsLocation="left" responsive="true">
+
+			<p:column headerText="Nome">
+				<h:outputText value="#{jg.nome}" />
+			</p:column>
+
+		</p:orderList>
+
+	</h:form>
+</h:body>
+</html>

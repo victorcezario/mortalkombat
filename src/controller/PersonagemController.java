@@ -21,6 +21,7 @@ public class PersonagemController {
 		entitymanager.persist(obj);
 		entitymanager.getTransaction().commit();
 	}
+	
 	public List<Personagem> Listar() {
 		EntityManager entitymanager = manager.createEntityManager();
 		
