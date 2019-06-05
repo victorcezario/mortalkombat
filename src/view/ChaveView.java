@@ -18,26 +18,24 @@ import model.*;
 @ViewScoped
 public class ChaveView {
 
-	public List<Jogador> jog;
+	public List<Jogador> jogadores;
 	public List<Jogador> jogadoresA;
 	public List<Jogador> jogadoresB;
 	public List<Jogador> getJogadores() {
-		return jog;
+		return jogadores;
 	}
 	
 	public List<Jogador> getJogadoresA() {
-		System.out.println(jogadoresA);
 		return jogadoresA;
 	}
 	public List<Jogador> getJogadoresB() {
-		System.out.println(jogadoresB);
 		return jogadoresB;
 	}
     @PostConstruct
     public void init() {
     	try {
     		
-			jog = new JogadorController().ListarA();
+			jogadores = new JogadorController().Listar();
 			
 			jogadoresA = new JogadorController().ListarA();
 			jogadoresB = new JogadorController().ListarB();
@@ -48,7 +46,7 @@ public class ChaveView {
     }
  
     public void setjogadores(List<Jogador> jogadores) {
-        this.jog = jogadores;
+        this.jogadores = jogadores;
     }     
      
     public void onSelect(SelectEvent event) {
@@ -64,6 +62,5 @@ public class ChaveView {
     public void onReorder() {
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "List Reordered", null));
-        System.out.println(jogadoresA);
     }
 }
