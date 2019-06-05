@@ -18,16 +18,29 @@ import model.*;
 @ViewScoped
 public class ChaveView {
 
-	private List<Jogador> jogadores;
+	public List<Jogador> jog;
+	public List<Jogador> jogadoresA;
+	public List<Jogador> jogadoresB;
 	public List<Jogador> getJogadores() {
-		System.out.println(jogadores);
-		return jogadores;
+		return jog;
 	}
 	
+	public List<Jogador> getJogadoresA() {
+		System.out.println(jogadoresA);
+		return jogadoresA;
+	}
+	public List<Jogador> getJogadoresB() {
+		System.out.println(jogadoresB);
+		return jogadoresB;
+	}
     @PostConstruct
     public void init() {
     	try {
-			jogadores = new JogadorController().Listar();
+    		
+			jog = new JogadorController().ListarA();
+			
+			jogadoresA = new JogadorController().ListarA();
+			jogadoresB = new JogadorController().ListarB();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -35,8 +48,8 @@ public class ChaveView {
     }
  
     public void setjogadores(List<Jogador> jogadores) {
-        this.jogadores = jogadores;
-    }    
+        this.jog = jogadores;
+    }     
      
     public void onSelect(SelectEvent event) {
         FacesContext context = FacesContext.getCurrentInstance();
@@ -51,5 +64,6 @@ public class ChaveView {
     public void onReorder() {
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "List Reordered", null));
+        System.out.println(jogadoresA);
     }
 }

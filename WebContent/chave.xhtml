@@ -10,22 +10,45 @@
 <h:body>
 	<h:form>
 
+    <p:growl id="msgs" showDetail="true" />
+   
+    <p:orderList value="#{chaveView.jogadoresA}" var="jogador" itemValue="#{jogador.apelido}" responsive="true">
+        <p:ajax event="select" listener="#{chaveView.onSelect}" update="msgs"/>
+        <p:ajax event="unselect" listener="#{chaveView.onUnselect}" update="msgs"/>
+        <p:ajax event="reorder" listener="#{chaveView.onReorder}" update="msgs"/>
+         
+        <f:facet name="caption">Jogadores A</f:facet>
+ 
+        <p:column style="width:40px">
+            <h:graphicImage name="showcase/images/themeswitcher/themeswitcher-#{theme.name}.png" alt="#{theme.name}" styleClass="ui-theme"/>
+        </p:column>
+ 
+         <p:column>
+            <h:outputText value="#{jogador.nome}" />
+        </p:column>
+    </p:orderList>
 
-		<p:dataTable id="jogadorTable" var="jogador"
-			value="#{chaveView.jogadores}">
-			<p:column headerText="Nome">
-				<h:outputText value="#{jogador.nome}" />
-			</p:column>
-		</p:dataTable>
+	</h:form>
+	
+	<h:form>
 
-		<p:orderList value="#{chaveView.jogadores}" var="jg"
-			controlsLocation="left" responsive="true">
-
-			<p:column headerText="Nome">
-				<h:outputText value="#{jg.nome}" />
-			</p:column>
-
-		</p:orderList>
+    <p:growl id="msgs" showDetail="true" />
+   
+    <p:orderList value="#{chaveView.jogadoresB}" var="jogador" itemValue="#{jogador.apelido}" responsive="true">
+        <p:ajax event="select" listener="#{chaveView.onSelect}" update="msgs"/>
+        <p:ajax event="unselect" listener="#{chaveView.onUnselect}" update="msgs"/>
+        <p:ajax event="reorder" listener="#{chaveView.onReorder}" update="msgs"/>
+         
+        <f:facet name="caption">Jogadores B</f:facet>
+ 
+        <p:column style="width:40px">
+            <h:graphicImage name="showcase/images/themeswitcher/themeswitcher-#{theme.name}.png" alt="#{theme.name}" styleClass="ui-theme"/>
+        </p:column>
+ 
+         <p:column>
+            <h:outputText value="#{jogador.nome}" />
+        </p:column>
+    </p:orderList>
 
 	</h:form>
 </h:body>
