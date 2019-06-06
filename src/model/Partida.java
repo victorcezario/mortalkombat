@@ -59,6 +59,18 @@ public class Partida {
 	public void setVencedor(Jogador vencedor) {
 		this.vencedor = vencedor;
 	}
+	
+	public Partida() {
+		
+	}
+	
+	public Partida(Jogador jogadorA, Personagem personagemA, Jogador jogadorB, Personagem personagemB) {
+		super();
+		this.jogadorA = jogadorA;
+		this.personagemA = personagemA;
+		this.jogadorB = jogadorB;
+		this.personagemB = personagemB;
+	}
 
 	
 	

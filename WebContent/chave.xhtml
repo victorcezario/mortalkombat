@@ -8,53 +8,105 @@
 	<title>Lista de Chaves</title>
 </h:head>
 <h:body>
+	
 	<h:form>
 
     <p:growl id="msgs" showDetail="true" />
    
-    <p:orderList value="#{chaveView.jogadoresA}" var="jogador" itemValue="#{jogador.apelido}" responsive="true">
+    <p:orderList value="#{chaveView.jogadoresA}" var="jogadorA" itemValue="#{jogadorA.nome}" responsive="true">
         <p:ajax event="select" listener="#{chaveView.onSelect}" update="msgs"/>
         <p:ajax event="unselect" listener="#{chaveView.onUnselect}" update="msgs"/>
         <p:ajax event="reorder" listener="#{chaveView.onReorder}" update="msgs"/>
          
         <f:facet name="caption">Jogadores A</f:facet>
  
-        <p:column style="width:40px">
-            <h:graphicImage name="showcase/images/themeswitcher/themeswitcher-#{theme.name}.png" alt="#{theme.name}" styleClass="ui-theme"/>
-        </p:column>
- 
          <p:column>
-            <h:outputText value="#{jogador.nome}" />
+            <h:outputText value="#{jogadorA.nome}" />
         </p:column>
     </p:orderList>
-
+    
 	</h:form>
 	
 	<h:form>
 
     <p:growl id="msgs" showDetail="true" />
    
-    <p:orderList value="#{chaveView.jogadoresB}" var="jogador" itemValue="#{jogador.apelido}" responsive="true">
+    <p:orderList value="#{chaveView.jogadoresB}" var="jogadorB" itemValue="#{jogadorB.nome}" responsive="true">
         <p:ajax event="select" listener="#{chaveView.onSelect}" update="msgs"/>
         <p:ajax event="unselect" listener="#{chaveView.onUnselect}" update="msgs"/>
         <p:ajax event="reorder" listener="#{chaveView.onReorder}" update="msgs"/>
          
         <f:facet name="caption">Jogadores B</f:facet>
  
-        <p:column style="width:40px">
-            <h:graphicImage name="showcase/images/themeswitcher/themeswitcher-#{theme.name}.png" alt="#{theme.name}" styleClass="ui-theme"/>
-        </p:column>
- 
          <p:column>
-            <h:outputText value="#{jogador.nome}" />
+            <h:outputText value="#{jogadorB.nome}" />
         </p:column>
     </p:orderList>
-     <p:commandButton value="Submit" update="displayCities" oncomplete="PF('cityDialog').show()" style="margin-top:5px" />
+    
+    </h:form>
+    
+	<h:form>
+
+    <p:growl id="msgs" showDetail="true" />
+   
+    <p:orderList value="#{chaveView.personagensA}" var="personagemA" itemValue="#{personagemA.nome}" responsive="true">
+        <p:ajax event="select" listener="#{chaveView.onSelect}" update="msgs"/>
+        <p:ajax event="unselect" listener="#{chaveView.onUnselect}" update="msgs"/>
+        <p:ajax event="reorder" listener="#{chaveView.onReorder}" update="msgs"/>
+         
+        <f:facet name="caption">Personagem A</f:facet>
+ 
+         <p:column>
+            <h:outputText value="#{personagemA.nome}" />
+        </p:column>
+    </p:orderList>
+    
+    </h:form>
+    
+	<h:form>
+
+    <p:growl id="msgs" showDetail="true" />
+   
+    <p:orderList value="#{chaveView.personagensB}" var="personagemB" itemValue="#{personagemB.nome}" responsive="true">
+        <p:ajax event="select" listener="#{chaveView.onSelect}" update="msgs"/>
+        <p:ajax event="unselect" listener="#{chaveView.onUnselect}" update="msgs"/>
+        <p:ajax event="reorder" listener="#{chaveView.onReorder}" update="msgs"/>
+         
+        <f:facet name="caption">Personagem B</f:facet>
+ 
+         <p:column>
+            <h:outputText value="#{personagemB.nome}" />
+        </p:column>
+    </p:orderList>
+    
+    </h:form>
+    
+    <h:form>
+
+	 <p:commandButton value="Alterar" action="#{chaveView.set}" oncomplete="callButton2()" style="margin-top:5px" />
+     <p:remoteCommand name="callButton2"  oncomplete="PF('cityDialog').show()"/>
+     <p:commandButton value="Submit" update="dtTable" oncomplete="PF('cityDialog').show()" style="margin-top:5px" />
      
-     <p:dialog modal="true" showEffect="fade" hideEffect="fade" widgetVar="cityDialog" header="Jogadores" width="500">
-       <p:dataList id="displayCities" value="#{chaveView.jogadores}" var="jog">
-           <h:outputText value="#{jog.nome}" />
-       </p:dataList>
+     <p:dialog modal="true" showEffect="fade" hideEffect="fade" widgetVar="cityDialog" header="Partidas" width="800">
+     
+		<p:dataTable id="dtTable" var="c" value="#{chaveView.tableClassificacao}">
+		    <p:column headerText="Jogador A">
+		        <h:outputText value="#{c.jogadorA.nome}" />
+		    </p:column>
+		 
+		    <p:column headerText="Personagem A">
+		        <h:outputText value="#{c.personagemA.nome}" />
+		    </p:column>
+		 
+		    <p:column headerText="Jogador B">
+		        <h:outputText value="#{c.jogadorB.nome}" />
+		    </p:column>
+		 
+		    <p:column headerText="Personagem B">
+		        <h:outputText value="#{c.personagemB.nome}" />
+		    </p:column>
+		</p:dataTable>
+		
     </p:dialog>
     
 	</h:form>

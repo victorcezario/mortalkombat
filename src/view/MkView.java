@@ -36,8 +36,8 @@ public class MkView {
 	public void init() {
 
 		try {
-			personagens = new PersonagemController().Listar();
-			jogadores = new JogadorController().Listar();
+			personagens = new PersonagemController().ListarA();
+			jogadores = new JogadorController().ListarA();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
