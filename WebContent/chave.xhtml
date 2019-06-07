@@ -8,107 +8,183 @@
 	<title>Lista de Chaves</title>
 </h:head>
 <h:body>
-	
-	<h:form>
 
-    <p:growl id="msgs" showDetail="true" />
-   
-    <p:orderList value="#{chaveView.jogadoresA}" var="jogadorA" itemValue="#{jogadorA.nome}" responsive="true">
-        <p:ajax event="select" listener="#{chaveView.onSelect}" update="msgs"/>
-        <p:ajax event="unselect" listener="#{chaveView.onUnselect}" update="msgs"/>
-        <p:ajax event="reorder" listener="#{chaveView.onReorder}" update="msgs"/>
-         
-        <f:facet name="caption">Jogadores A</f:facet>
+<script type="text/javascript">
+    function handleDrop(event, ui) {
+        var droppedJogadores = ui.draggable;
+        var droppedJogadores2 = ui.draggable;
+        var droppedPersonagens = ui.draggable;
+        var droppedPersonagens2 = ui.draggable;
  
-         <p:column>
-            <h:outputText value="#{jogadorA.nome}" />
-        </p:column>
-    </p:orderList>
-    
-	</h:form>
-	
-	<h:form>
-
-    <p:growl id="msgs" showDetail="true" />
-   
-    <p:orderList value="#{chaveView.jogadoresB}" var="jogadorB" itemValue="#{jogadorB.nome}" responsive="true">
-        <p:ajax event="select" listener="#{chaveView.onSelect}" update="msgs"/>
-        <p:ajax event="unselect" listener="#{chaveView.onUnselect}" update="msgs"/>
-        <p:ajax event="reorder" listener="#{chaveView.onReorder}" update="msgs"/>
-         
-        <f:facet name="caption">Jogadores B</f:facet>
+        droppedJogadores.fadeOut('fast');
+        droppedJogadores2.fadeOut('fast');
+        droppedPersonagens.fadeOut('fast');
+        droppedPersonagens2.fadeOut('fast');
+    }
+</script>
  
-         <p:column>
-            <h:outputText value="#{jogadorB.nome}" />
-        </p:column>
-    </p:orderList>
-    
-    </h:form>
-    
-	<h:form>
+<h:form id="jForm">
 
-    <p:growl id="msgs" showDetail="true" />
-   
-    <p:orderList value="#{chaveView.personagensA}" var="personagemA" itemValue="#{personagemA.nome}" responsive="true">
-        <p:ajax event="select" listener="#{chaveView.onSelect}" update="msgs"/>
-        <p:ajax event="unselect" listener="#{chaveView.onUnselect}" update="msgs"/>
-        <p:ajax event="reorder" listener="#{chaveView.onReorder}" update="msgs"/>
-         
-        <f:facet name="caption">Personagem A</f:facet>
+	<p:growl id="growl" showDetail="true" sticky="true" />  
+       
+    <p:fieldset id="availableJogadoresField" legend="Lista de Jogadores">
+        <p:dataGrid id="availableJogadores" var="j" value="#{chaveView.jogadores}" columns="3">
+            <p:panel id="pnl" header="#{j.nome}" style="text-align:center">
+                <h:panelGrid columns="1" style="width:100%">
+                    <p:graphicImage name="/demo/images/j/xd.gif" />
+                </h:panelGrid>
+            </p:panel>
  
-         <p:column>
-            <h:outputText value="#{personagemA.nome}" />
-        </p:column>
-    </p:orderList>
+            <p:draggable for="pnl" revert="true" handle=".ui-panel-titlebar" stack=".ui-panel"/>
+        </p:dataGrid>
+    </p:fieldset>
     
-    </h:form>
-    
-	<h:form>
-
-    <p:growl id="msgs" showDetail="true" />
-   
-    <p:orderList value="#{chaveView.personagensB}" var="personagemB" itemValue="#{personagemB.nome}" responsive="true">
-        <p:ajax event="select" listener="#{chaveView.onSelect}" update="msgs"/>
-        <p:ajax event="unselect" listener="#{chaveView.onUnselect}" update="msgs"/>
-        <p:ajax event="reorder" listener="#{chaveView.onReorder}" update="msgs"/>
-         
-        <f:facet name="caption">Personagem B</f:facet>
+    <p:fieldset id="selectedJogador" legend="Partida 1" style="margin-top:20px">
+        <p:outputPanel id="dropArea">
+            <h:outputText value="Solte aqui !" rendered="#{empty chaveView.droppedJogadores}" style="font-size:24px;" />
+            <p:dataTable id="selectedJogadorsTable" var="j" value="#{chaveView.droppedJogadores}" rendered="#{not empty chaveView.droppedJogadores}">
+                <p:column headerText="Id">
+                    <h:outputText value="#{j.idJogador}" />
+                </p:column>
  
-         <p:column>
-            <h:outputText value="#{personagemB.nome}" />
-        </p:column>
-    </p:orderList>
+                <p:column headerText="Nome">
+                    <h:outputText value="#{j.nome}" />
+                </p:column>
+ 
+                <p:column headerText="Apelido">
+                    <h:outputText value="#{j.apelido}" />
+                </p:column>
+ 
+                <p:column headerText="País">
+                    <h:outputText value="#{j.pais}" />
+                </p:column>
+ 
+                <p:column style="width:32px">
+                    <p:commandButton update=":jForm selectedJogadorsTable" action="#{chaveView.removeJogador(j)}"  icon="pi pi-search">
+                        <f:setPropertyActionListener value="#{j}" target="#{chaveView.selectedJogador}" />
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+        </p:outputPanel>
+    </p:fieldset>
     
-    </h:form>
+    <p:fieldset id="selectedJogador2" legend="Partida 2" style="margin-top:100px">
+        <p:outputPanel id="dropArea2">
+            <h:outputText value="Solte aqui !" rendered="#{empty chaveView.droppedJogadores2}" style="font-size:24px;" />
+            <p:dataTable id="selectedJogadorsTable2" var="j" value="#{chaveView.droppedJogadores2}" rendered="#{not empty chaveView.droppedJogadores2}">
+                <p:column headerText="Id">
+                    <h:outputText value="#{j.idJogador}" />
+                </p:column>
+ 
+                <p:column headerText="Nome">
+                    <h:outputText value="#{j.nome}" />
+                </p:column>
+ 
+                <p:column headerText="Apelido">
+                    <h:outputText value="#{j.apelido}" />
+                </p:column>
+ 
+                <p:column headerText="País">
+                    <h:outputText value="#{j.pais}" />
+                </p:column>
+ 
+                <p:column style="width:32px">
+                    <p:commandButton update=":jForm selectedJogadorsTable2" action="#{chaveView.removeJogador2(j)}" icon="pi pi-search">
+                        <f:setPropertyActionListener value="#{j}" target="#{chaveView.selectedJogador2}" />
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+        </p:outputPanel>
+    </p:fieldset>
+ 
+ 	<p:fieldset id="availablePersonagensField" legend="Lista de Personagens">
+        <p:dataGrid id="availablePersonagens" var="p" value="#{chaveView.personagens}" columns="3">
+            <p:panel id="pnl" header="#{p.nome}" style="text-align:center">
+                <h:panelGrid columns="1" style="width:100%">
+                    <p:graphicImage name="/demo/images/j/xd.gif" />
+                </h:panelGrid>
+            </p:panel>
+ 
+            <p:draggable for="pnl" revert="true" handle=".ui-panel-titlebar" stack=".ui-panel"/>
+        </p:dataGrid>
+    </p:fieldset>
     
-    <h:form>
+    <p:fieldset id="selectedPersonagem" legend="Partida 1" style="margin-top:20px">
+        <p:outputPanel id="dropArea3">
+            <h:outputText value="Solte aqui !" rendered="#{empty chaveView.droppedPersonagens}" style="font-size:24px;" />
+            <p:dataTable id="selectedPersonagensTable" var="p" value="#{chaveView.droppedPersonagens}" rendered="#{not empty chaveView.droppedPersonagens}">
+                <p:column headerText="Id">
+                    <h:outputText value="#{p.idPersonagem}" />
+                </p:column>
+ 
+                <p:column headerText="Nome">
+                    <h:outputText value="#{p.nome}" />
+                </p:column>
 
-	 <p:commandButton value="Alterar" action="#{chaveView.set}" oncomplete="callButton2()" style="margin-top:5px" />
-     <p:remoteCommand name="callButton2"  oncomplete="PF('cityDialog').show()"/>
-     <p:commandButton value="Submit" update="dtTable" oncomplete="PF('cityDialog').show()" style="margin-top:5px" />
-     
-     <p:dialog modal="true" showEffect="fade" hideEffect="fade" widgetVar="cityDialog" header="Partidas" width="800">
-     
-		<p:dataTable id="dtTable" var="c" value="#{chaveView.tableClassificacao}">
-		    <p:column headerText="Jogador A">
-		        <h:outputText value="#{c.jogadorA.nome}" />
-		    </p:column>
-		 
-		    <p:column headerText="Personagem A">
-		        <h:outputText value="#{c.personagemA.nome}" />
-		    </p:column>
-		 
-		    <p:column headerText="Jogador B">
-		        <h:outputText value="#{c.jogadorB.nome}" />
-		    </p:column>
-		 
-		    <p:column headerText="Personagem B">
-		        <h:outputText value="#{c.personagemB.nome}" />
-		    </p:column>
-		</p:dataTable>
-		
+                <p:column style="width:32px">
+                    <p:commandButton update=":jForm selectedPersonagensTable" action="#{chaveView.removePersonagem}" icon="pi pi-search">
+                        <f:setPropertyActionListener value="#{p}" target="#{chaveView.selectedPersonagem}" />
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+        </p:outputPanel>
+    </p:fieldset>
+    
+    <p:fieldset id="selectedPersonagem2" legend="Partida 2" style="margin-top:100px">
+        <p:outputPanel id="dropArea4">
+            <h:outputText value="Solte aqui !" rendered="#{empty chaveView.droppedPersonagens2}" style="font-size:24px;" />
+            <p:dataTable id="selectedPersonagensTable2" var="p" value="#{chaveView.droppedPersonagens2}" rendered="#{not empty chaveView.droppedPersonagens2}">
+                <p:column headerText="Id">
+                    <h:outputText value="#{p.idPersonagem}" />
+                </p:column>
+ 
+                <p:column headerText="Nome">
+                    <h:outputText value="#{p.nome}" />
+                </p:column>
+                <p:column style="width:32px">
+                    <p:commandButton  update=":jForm selectedPersonagensTable2" action="#{chaveView.removePersonagem2}" icon="pi pi-search">
+                        <f:setPropertyActionListener value="#{p}" target="#{chaveView.selectedPersonagem2}" />
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+        </p:outputPanel>
+    </p:fieldset>
+    
+    <p:droppable for="selectedJogador" tolerance="touch" activeStyleClass="ui-state-highlight" datasource="availableJogadores" onDrop="handleDrop">
+        <p:ajax listener="#{chaveView.onCarDrop}" update="dropArea availableJogadores" />
+    </p:droppable>
+    
+    <p:droppable for="selectedJogador2" tolerance="touch" activeStyleClass="ui-state-highlight" datasource="availableJogadores" onDrop="handleDrop">
+        <p:ajax listener="#{chaveView.onCarDrop2}" update="dropArea2 availableJogadores" />
+    </p:droppable>
+    
+     <p:droppable for="selectedPersonagem" tolerance="touch" activeStyleClass="ui-state-highlight" datasource="availablePersonagens" onDrop="handleDrop">
+        <p:ajax listener="#{chaveView.onCarDrop3}" update="dropArea3 availablePersonagens" />
+    </p:droppable>
+    
+    <p:droppable for="selectedPersonagem2" tolerance="touch" activeStyleClass="ui-state-highlight" datasource="availablePersonagens" onDrop="handleDrop">
+        <p:ajax listener="#{chaveView.onCarDrop4}" update="dropArea4 availablePersonagens" />
+    </p:droppable>
+ 
+    <p:dialog header="Car Detail" widgetVar="jDialog" resizable="false" draggable="false"
+              showEffect="fade" hideEffect="fade" modal="true">
+ 
+        <p:outputPanel id="display">
+            <h:panelGrid columns="2" cellpadding="5" rendered="#{not empty chaveView.selectedJogador}">
+                <f:facet name="header">
+                    <p:graphicImage name="/demo/images/j/#{chaveView.selectedPersonagem}.gif"/>
+                </f:facet>
+ 
+                <h:outputText value="Id" />
+                <h:outputText value="#{chaveView.selectedPersonagem.idPersonagem}" style="font-weight:bold"/>
+ 
+                <h:outputText value="Nome:" />
+                <h:outputText value="#{chaveView.selectedPersonagem.nome}" style="font-weight:bold"/>
+            </h:panelGrid>
+        </p:outputPanel>
     </p:dialog>
-    
-	</h:form>
+    <p:commandButton value="Criar Partida"  action="#{chaveView.createPartida}" update="@form" style="margin-top:5px" />
+</h:form>
+
 </h:body>
 </html>
