@@ -7,26 +7,27 @@
 <h:head>
 	<title>Mortal Kombat - Page Title</title>
 	<h:outputStylesheet library="css" name="style.css" />
-
 </h:head>
 <h:body>
+<script type="text/javascript">
+function refreshTable(){
+	location.reload();
+}
+</script>
 	<h:form>
 		<p:growl id="messages" />
 		<p:menubar>
-			<p:menuitem>
-				<h:link outcome="/index.xhmtl">
-					<h:graphicImage library="images" name="logo.png" height="32" />
-				</h:link>
-			</p:menuitem>
+			<p:menuitem value="Mortal Kombat" url="index.xhtml" style="font-family:'mortalkombat';color:rgb(225,170,1);font-size: 24px;"/>
 			<p:menuitem value="Inicio" url="index.xhtml" icon="fa fa-home" />
-			<p:menuitem value="Partidas" url="#" icon="fa fa-trophy" />
+			<p:menuitem value="Partidas" url="chave.xhtml" icon="fa fa-trophy" />
 			<p:menuitem value="Personagens" url="personagem.xhtml" icon="fa fa-heart" />
-			<p:menuitem value="Jogadores" url="jogador.xhtml" icon="fa fa-people" />
+			<p:menuitem value="Jogadores" url="jogador.xhtml" icon="fa fa-group" />
+			<p:menuitem value="Classificacao" url="classificacao.xhtml" icon="fa fa-tournament" />
 		</p:menubar>
 	</h:form>
 <div class="content">
-	<h1 style="font-family:'MortalKombat';text-align:center;">Jogadores</h1>
-	<p:dataTable id="jogadorTable" var="jogador" value="#{MkView.jogadores}">
+	<h3 style="font-family:'mortalkombat';text-align:center;font-size:20px">Jogadores</h3>
+	<p:dataTable id="jogadorTable" var="jogador" value="#{chaveView.jogadores}">
     <p:column headerText="Nome">
         <h:outputText value="#{jogador.nome}" />
     </p:column>
@@ -45,17 +46,18 @@
 <div style="margin: 10px;" align="center">
 	<p:commandButton value="Cadastrar novo jogador" type="button" onclick="PF('dlg2').show();" style="color:white;align:center;height:50px" />
 </div>
-<p:dialog header="Cadastrar novo jogador" widgetVar="dlg2" modal="true" height="200" width="400" onHide="refreshTable();">
+<p:dialog header="Cadastrar novo jogador" widgetVar="dlg2" modal="true" height="200" width="400">
     <h:outputText value="Nome do Jogador: " for="nome"/> <br />
-    <p:inputText style="color:white" value="#{jogador.nome}" id="nome" /><br />
+    <p:inputText style="color:white;width:100%" value="#{jogador.nome}" id="nome" /><br />
     <h:outputText value="Apelido:" /> <br />
-    <p:inputText style="color:white" value="#{jogador.apelido}" id="apelido"/><br />
+    <p:inputText style="color:white;width:100%" value="#{jogador.apelido}" id="apelido"/><br />
     <h:outputText value="Pais:" /> <br />
-    <p:inputText style="color:white" value="#{jogador.pais}" id="pais" /><br /><br />
+    <p:inputText style="color:white;width:100%" value="#{jogador.pais}" id="pais" /><br /><br />
     <p:commandButton value="Cadastrar novo jogador" 
-    			style="color:white; height:50px"
+    			style="color:white; height:50px;width:100%"
     			update="jogadorForm"
     			action="#{jogador.Cadastrar}"
+    			oncomplete="refreshTable();"
              	/>
 </p:dialog>  
 </h:form>

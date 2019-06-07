@@ -14,20 +14,36 @@ body{
   	background-size: cover;
   	background-attachment: fixed;
 }
+.content{
+	padding: 10px 10px 10px 10px;
+	background-color: rgba(0,0,0,.4);
+	height:600px;
+	margin-top: 60px;
+	color:white;  
+	border-top: 5px solid #fbaa01;
+}
 .ui-menu{
 	height:50;
 }
+.ui-menu.ui-widget .ui-menuitem-link .ui-menuitem-icon{
+	width: 100%;
+}
 .ui-menu.ui-menubar{
-	background-image: linear-gradient(to right, #000000, #fbaa01);
-	background-color: #000000;
-	border: none;
+	background-image: none;
+	background-color: rgba(30,30,30,0.8);
+	border:none;
+	border-top: 2px solid #fbaa01;
 	color: white;
 	position: fixed;
 	top: 0;
-	width: 100%;
+	left: 0;
+	width: 97.5%;
+	overflow: hidden;
+	z-index: 2;
 }
 .ui-menu.ui-widget a{
 	color: white;
+	display: block;
 }
 .ui-dialog.ui-widget-content .ui-dialog-titlebar{
 	background-color: rgb(30,30,30);
@@ -39,7 +55,7 @@ body{
 	color: white;
 }
 .ui-dialog.ui-widget-content .ui-dialog-content{
-	background-color: rgb(78,78,78);
+	background-color: rgba(78,78,78);
 	color: white;
 }
 .ui-menu.ui-widget a:hover{
@@ -68,7 +84,53 @@ body{
 	border: 1px solid #black;
 }
 
-.content{
-	padding: 10px 10px 10px 10px;
-	background-color: rgba(0,0,0,.4);height:600px;margin-top: 60px;color:white;  border-top: 5px solid #fbaa01;
+.ui-widget-header{
+	background: rgb(30,30,30);
+	color: white;
+}
+.ui-datagrid .ui-datagrid-header{
+	border:none;
+}
+.ui-paginator.ui-paginator-top, .ui-paginator.ui-paginator-bottom{
+	border:none;
+}
+.ui-grid{
+	border:none;
+}
+.ui-panel .ui-panel-titlebar{
+	border: none;
+	border-top: 2px solid #fbaa01;
+	
+}
+.ui-fieldset, .ui-fieldset .ui-fieldset-legend{
+	color: white;
+}
+.ui-button-text-only .ui-button-text{
+	color: white;
+}
+.ui-widget .ui-widget{
+	border: none;
+}
+.personagem{
+  border: 2px solid #fbaa01;
+  background: radial-gradient(ellipse at center,#505050 0,#080808 100%);
+  overflow: hidden;
+  position: relative;
+  transition: transform .4s; /* Animation */
+}
+
+.personagem:hover{
+ transform: scale(1.1);
+ border: 1px solid #404040;
+ background: radial-gradient(ellipse at center,#505050 0,#fbaa01 100%);
+ overflow: hidden;
+ position: relative;
+}
+
+.ui-datatable thead th, .ui-datatable tbody td, .ui-datatable tfoot td, .ui-datatable tfoot th{
+	font-family:"mortalkombat";
+	text-shadow: none;
+}
+::-webkit-scrollbar {
+display: none;
 }

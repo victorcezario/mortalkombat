@@ -5,10 +5,11 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
-	<title>Lista de Chaves</title>
+	<title>Mortal Kombat - Page Title</title>
+	<h:outputStylesheet library="css" name="style.css" />
+
 </h:head>
 <h:body>
-
 <script type="text/javascript">
     function handleDrop(event, ui) {
         var droppedJogadores = ui.draggable;
@@ -18,8 +19,20 @@
         droppedJogadores2.fadeOut('fast');
     }
 </script>
- 
-<h:form id="jForm">
+	<h:form>
+		<p:growl id="messages" />
+		<p:menubar>
+			<p:menuitem value="Mortal Kombat" url="index.xhtml" style="font-family:'mortalkombat';color:rgb(225,170,1);font-size: 24px;"/>
+			<p:menuitem value="Inicio" url="index.xhtml" icon="fa fa-home" />
+			<p:menuitem value="Partidas" url="chave.xhtml" icon="fa fa-trophy" />
+			<p:menuitem value="Personagens" url="personagem.xhtml" icon="fa fa-heart" />
+			<p:menuitem value="Jogadores" url="jogador.xhtml" icon="fa fa-group" />
+			<p:menuitem value="Classificacao" url="classificacao.xhtml" icon="fa fa-tournament" />
+		</p:menubar>
+	</h:form>
+<div class="content">
+	<h3 style="font-family:'mortalkombat';text-align:center;font-size:20px">Classificação</h3>
+	<h:form id="jForm">
 
 	<p:growl id="growl" showDetail="true" sticky="true" />  
        
@@ -89,6 +102,7 @@
     </p:dialog>
     <p:commandButton value="Criar Partida"  action="#{chaveView.createPartida}" update="@form" style="margin-top:5px" />
 </h:form>
-
+</div>
 </h:body>
+
 </html>

@@ -10,33 +10,29 @@
 
 </h:head>
 <h:body>
-<style type="text/css">
-    .value {
-        font-weight: bold;
-    }
-</style>
- 
- 
-<h:form id="form">
-    <p:dataGrid var="personagem" value="#{MkView.personagem}" columns="3" layout="grid"
-        rows="12" paginator="true" id="personagens"
-        >
-         
-        <f:facet name="header">
-            MK - Personagens
-        </f:facet>
- 
-        <p:panel header="#{personagem.nome}" style="text-align:center">
+	<h:form>
+		<p:growl id="messages" />
+		<p:menubar>
+			<p:menuitem value="Mortal Kombat" url="index.xhtml" style="font-family:'mortalkombat';color:rgb(225,170,1);font-size: 24px;"/>
+			<p:menuitem value="Inicio" url="index.xhtml" icon="fa fa-home" />
+			<p:menuitem value="Partidas" url="chave.xhtml" icon="fa fa-trophy" />
+			<p:menuitem value="Personagens" url="personagem.xhtml" icon="fa fa-heart" />
+			<p:menuitem value="Jogadores" url="jogador.xhtml" icon="fa fa-group" />
+			<p:menuitem value="Classificacao" url="classificacao.xhtml" icon="fa fa-tournament" />
+		</p:menubar>
+	</h:form>
+<div class="content">
+	<h3 style="font-family:'mortalkombat';text-align:center;font-size:20px">Personagens</h3>
+	<p:dataGrid var="p" value="#{chaveView.personagens}" columns="6" layout="grid" paginator="false" id="p"
+        paginatorTemplate="">
+        <p:panel header="#{p.nome}" style="text-align:center">
             <h:panelGrid columns="1" style="width:100%">
-                <p:graphicImage library="images/personagens" name="#{personagem.idPersonagem}.jpeg"/> 
- 
-                <h:outputText value="#{personagem.nome}" />
-
+                <p:graphicImage name="images/personagens/#{p.idPersonagem}.png" class="personagem"/>          
             </h:panelGrid>
         </p:panel>
  
-    </p:dataGrid>
-</h:form>
+    </p:dataGrid> 
+</div>
 </h:body>
 
 </html>
