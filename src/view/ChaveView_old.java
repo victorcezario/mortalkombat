@@ -3,11 +3,13 @@ package view;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.CloseEvent;
@@ -27,8 +29,9 @@ import model.*;
 
 @ManagedBean(name = "chaveView")
 @ViewScoped
-public class ChaveView implements Serializable {
+public class ChaveView_old implements Serializable {
 	
+	public List<Chave> chaves;
 	public List<Jogador> jogadores;
 	public List<Jogador> jogadoresA;
 	public List<Jogador> jogadoresB;
@@ -123,37 +126,7 @@ public class ChaveView implements Serializable {
 	public List<Jogador> getJogadoresB() {
 		return jogadoresB;
 	}
-    public List<Partida> getTableClassificacao() {
-		return tableClassificacao;
-	}
-
-	public void setTableClassificacao(List<Partida> tableClassificacao) {
-		this.tableClassificacao = tableClassificacao;
-	}
-
-	public List<Personagem> getPersonagensA() {
-		return personagensA;
-	}
-
-	public void setPersonagensA(List<Personagem> personagensA) {
-		this.personagensA = personagensA;
-	}
-
-	public List<Personagem> getPersonagensB() {
-		return personagensB;
-	}
-
-	public void setPersonagensB(List<Personagem> personagensB) {
-		this.personagensB = personagensB;
-	}
-
-	public List<Partida> getPartidas() {
-		return partidas;
-	}
-
-	public void setPartidas(List<Partida> partidas) {
-		this.partidas = partidas;
-	}
+   
 
 	@PostConstruct
     public void init() {
@@ -168,6 +141,27 @@ public class ChaveView implements Serializable {
 			personagensA = new PersonagemController().ListarA();
 			personagensB = new PersonagemController().ListarB();
 				
+			droppedJogadores.add(jogadores.get(0));
+			droppedJogadores.add(jogadores.get(1));
+			droppedJogadores.add(jogadores.get(2));
+			droppedJogadores.add(jogadores.get(3));
+			
+			
+			droppedJogadores2.add(jogadores.get(4));
+			droppedJogadores2.add(jogadores.get(5));
+			droppedJogadores2.add(jogadores.get(6));
+			droppedJogadores2.add(jogadores.get(7));
+			
+			droppedPersonagens.add(personagens.get(0));
+			droppedPersonagens.add(personagens.get(1));
+			droppedPersonagens.add(personagens.get(2));
+			droppedPersonagens.add(personagens.get(3));
+			
+			
+			droppedPersonagens2.add(personagens.get(4));
+			droppedPersonagens2.add(personagens.get(5));
+			droppedPersonagens2.add(personagens.get(6));
+			droppedPersonagens2.add(personagens.get(7));
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -195,10 +189,11 @@ public class ChaveView implements Serializable {
 			}
 			Chave chave = new Chave(1, partidas);
 			chave.Cadastrar();
+			chaves.add(chave);
 			createSemiFinal(partidas);
 			saveMessage("Partida Criada com sucesso !", "Successful");
 		}else {
-			saveMessage("Por gentileza complete a formação das equipes e personagens !", "Warn");
+			saveMessage("Por gentileza complete a formaï¿½ï¿½o das equipes e personagens !", "Warn");
 		}
 		
 		
@@ -236,6 +231,7 @@ public class ChaveView implements Serializable {
 			
 			Chave chave = new Chave(2, partidasSemi);
 			chave.Cadastrar();
+			chaves.add(chave);
 			createFinal(partidasSemi);
 	}
 	public void createFinal(List<Partida> partidas) {
@@ -255,8 +251,9 @@ public class ChaveView implements Serializable {
 		partida.Cadastrar();
 
 		Chave chave = new Chave(3, partidasFinal);
+		chaves.add(chave);
 		chave.Cadastrar();
-}
+	}
 	public static double getRandomIntegerBetweenRange(double min, double max){
 	    double x = (int)(Math.random()*((max-min)+1))+min;
 	    return x;
@@ -405,6 +402,44 @@ public class ChaveView implements Serializable {
 	public void setSelectedPersonagem2(Jogador selectedPersonagem2) {
 		this.selectedPersonagem2 = selectedPersonagem2;
 	}  
-	
+	 public List<Partida> getTableClassificacao() {
+			return tableClassificacao;
+		}
+
+		public void setTableClassificacao(List<Partida> tableClassificacao) {
+			this.tableClassificacao = tableClassificacao;
+		}
+
+		public List<Personagem> getPersonagensA() {
+			return personagensA;
+		}
+
+		public void setPersonagensA(List<Personagem> personagensA) {
+			this.personagensA = personagensA;
+		}
+
+		public List<Personagem> getPersonagensB() {
+			return personagensB;
+		}
+
+		public void setPersonagensB(List<Personagem> personagensB) {
+			this.personagensB = personagensB;
+		}
+
+		public List<Partida> getPartidas() {
+			return partidas;
+		}
+
+		public void setPartidas(List<Partida> partidas) {
+			this.partidas = partidas;
+		}
+
+		public List<Chave> getChave() {
+			return chaves;
+		}
+
+		public void setChave(List<Chave> chave) {
+			this.chaves = chave;
+		}
     
 }

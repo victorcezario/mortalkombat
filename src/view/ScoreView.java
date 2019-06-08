@@ -1,6 +1,7 @@
 package view;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -11,49 +12,79 @@ import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 
 import controller.ChaveController;
+import controller.TorneioController;
 import model.Chave;
+import model.Partida;
+import model.Torneio;
 
 @ManagedBean(name="scoreView")
 @ViewScoped
 public class ScoreView implements Serializable {
      
     private TreeNode root;
-     
+    List<Partida> partidas = new ArrayList<>();
+	List<Partida> partidasSemi = new ArrayList<>();
+	List<Partida> partidasFinal = new ArrayList<>();
     @PostConstruct
     public void init() {
-    	List<Chave> chaves = new ChaveController().Listar();
+    	List<Torneio> torneio = new TorneioController().lastResult();
+    	System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n inicio TORNEIOS");
+    	System.out.println("Setor1: "+torneio.get(0).getChaves().get(0));
+    	System.out.println("Setor2: "+torneio.get(0).getChaves());
+    	System.out.println("Setor3: "+torneio.get(0));
+    	System.out.println("Setor4: "+torneio);
+    	System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n fim TORNEIOS");
+    	List<Chave> chaves = torneio.get(0).getChaves();
     	for (Chave chave : chaves) {
     		if(chave.getTipoChave() == 3) {
-    			root = new DefaultTreeNode(chave.getPartidas().get(0).getJogadorVencedor().getNome(), null);
+    			partidasFinal.add(chave.getPartidas().get(0));
     		}
     		if(chave.getTipoChave() == 2) {
-    			System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\AAAAAAAAAAAAAAAAAAAA");
-    			System.out.println(chave.getPartidas().get(0).getJogadorA().getNome());
-        		System.out.println(chave.getPartidas().get(0).getJogadorB().getNome());
-        		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\AAAAAAAAAAAAAAAAAAAA");
-    			//System.out.println(chave.getPartidas());
-    			//root.getChildren().add(new DefaultTreeNode(chave.getPartidas().get(1).getJogadorA().getNome()));
-    				 //root.getChildren().add(new DefaultTreeNode(chave.getPartidas().get(s).getJogadorB().getNome()));
-    			 
+        		partidasSemi.add(chave.getPartidas().get(0));
+        		partidasSemi.add(chave.getPartidas().get(1));
+    		}
+    		if(chave.getTipoChave() == 1) {
+        		partidas.add(chave.getPartidas().get(0));
+        		partidas.add(chave.getPartidas().get(1));
+        		partidas.add(chave.getPartidas().get(2));
+        		partidas.add(chave.getPartidas().get(3));
     		}
 		}
-    	
-    	//if(chaves.get(0).getTipoChave() == 3) {
-    		//root = new DefaultTreeNode(chaves.get(0).getPartidas().get(0).getJogadorVencedor().getNome(), null);
-    	//}
-    	//root = new DefaultTreeNode("Teste", null);
-        //root.setExpanded(true);
-        //TreeNode node0 = new DefaultTreeNode("Node 0", root);
-        //TreeNode node1 = new DefaultTreeNode("Node 1", root);
-        //TreeNode node00 = new DefaultTreeNode("Node 0.0", node0);
-        //TreeNode node01 = new DefaultTreeNode("Node 0.1", node0);
-        //TreeNode node10 = new DefaultTreeNode("Node 1.0", node1);
-        //node1.getChildren().add(new DefaultTreeNode("Node 1.1"));
-        //node00.getChildren().add(new DefaultTreeNode("Node 0.0.0"));
-       // node00.getChildren().add(new DefaultTreeNode("Node 0.0.1"));
-        //node01.getChildren().add(new DefaultTreeNode("Node 0.1.0"));
-        //node10.getChildren().add(new DefaultTreeNode("Node 1.0.0"));
-        //root.getChildren().add(new DefaultTreeNode("Node 2"));
+    	root = new DefaultTreeNode(partidasFinal.get(0).getJogadorVencedor().getNome(), null);
+    	//Final
+        root.setExpanded(true);
+        TreeNode node0 = new DefaultTreeNode(partidasFinal.get(0).getJogadorA().getNome(), root);
+        TreeNode node1 = new DefaultTreeNode(partidasFinal.get(0).getJogadorB().getNome(), root);
+        node0.setExpanded(true);
+        node1.setExpanded(true);
+        //SemiFinal
+        TreeNode node00 = new DefaultTreeNode(partidasSemi.get(0).getJogadorA().getNome(), node0);
+        TreeNode node01 = new DefaultTreeNode(partidasSemi.get(0).getJogadorB().getNome(), node0);
+        node00.setExpanded(true);
+        node01.setExpanded(true);
+        TreeNode node10 = new DefaultTreeNode(partidasSemi.get(1).getJogadorA().getNome(), node1);
+        TreeNode node11 = new DefaultTreeNode(partidasSemi.get(1).getJogadorB().getNome(), node1);
+        node10.setExpanded(true);
+        node11.setExpanded(true);
+        //Quartas de Final
+        //Time Vermelho
+        TreeNode node001 = new DefaultTreeNode(partidas.get(0).getJogadorA().getNome(), node00);
+        TreeNode node011 = new DefaultTreeNode(partidas.get(0).getJogadorB().getNome(), node00);
+        node001.setExpanded(true);
+        node011.setExpanded(true);
+        TreeNode node101 = new DefaultTreeNode(partidas.get(1).getJogadorA().getNome(), node01);
+        TreeNode node111 = new DefaultTreeNode(partidas.get(1).getJogadorB().getNome(), node01);
+        node101.setExpanded(true);
+        node111.setExpanded(true);
+        //Time Azul
+        TreeNode node002 = new DefaultTreeNode(partidas.get(2).getJogadorA().getNome(), node10);
+        TreeNode node012 = new DefaultTreeNode(partidas.get(2).getJogadorB().getNome(), node10);
+        node002.setExpanded(true);
+        node012.setExpanded(true);
+        TreeNode node102 = new DefaultTreeNode(partidas.get(3).getJogadorA().getNome(), node11);
+        TreeNode node112 = new DefaultTreeNode(partidas.get(3).getJogadorB().getNome(), node11);
+        node102.setExpanded(true);
+        node112.setExpanded(true);
     }
  
     public TreeNode getRoot() {
