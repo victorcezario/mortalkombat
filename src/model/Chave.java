@@ -56,5 +56,11 @@ public class Chave {
 		entitymanager.persist(this);
 		entitymanager.getTransaction().commit();
 	}
+	@Override
+	public String toString() {
+		return "Chave [partidas=" + partidas + "]";
+	}
+	
+	
 	
 }

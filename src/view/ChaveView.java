@@ -32,12 +32,16 @@ public class ChaveView implements Serializable {
 	public List<Jogador> jogadores;
 	public List<Jogador> jogadoresA;
 	public List<Jogador> jogadoresB;
+	public Jogador jogadorSelected;
+	public Personagem personagemSelected;
 	public List<Partida> tableClassificacao;
 	public List<Personagem> personagens;
 	public List<Personagem> personagensA;
 	public List<Personagem> personagensB;
 	
 	public List<Partida> partidas = new ArrayList<>();
+	public List<Partida> partidasSemi = new ArrayList<>();
+	public List<Partida> partidasFinal = new ArrayList<>();
 	
 	public List<Jogador> droppedJogadores = new ArrayList<>();
 	
@@ -82,6 +86,31 @@ public class ChaveView implements Serializable {
 
 	public void setPersonagens(List<Personagem> personagens) {
 		this.personagens = personagens;
+	}
+	
+
+	public List<Partida> getPartidasSemi() {
+		return partidasSemi;
+	}
+
+	public void setPartidasSemi(List<Partida> partidasSemi) {
+		this.partidasSemi = partidasSemi;
+	}
+
+	public Personagem getPersonagemSelected() {
+		return personagemSelected;
+	}
+
+	public void setPersonagemSelected(Personagem personagemSelected) {
+		this.personagemSelected = personagemSelected;
+	}
+
+	public Jogador getJogadorSelected() {
+		return jogadorSelected;
+	}
+
+	public void setJogadorSelected(Jogador jogadorSelected) {
+		this.jogadorSelected = jogadorSelected;
 	}
 
 	public List<Jogador> getJogadores() {
@@ -152,18 +181,85 @@ public class ChaveView implements Serializable {
 		System.out.println("D" + droppedPersonagens2.size());
 		if(droppedJogadores.size() == 4 && droppedJogadores2.size() == 4 && droppedPersonagens.size() == 4 && droppedPersonagens2.size() == 4) {
 			for(int i=0;i<4;i++) {
-				Partida partida = new Partida(getDroppedJogadores().get(i),getDroppedPersonagens().get(i),getDroppedJogadores2().get(i),getDroppedPersonagens2().get(i));
+				double randomVencedor = getRandomIntegerBetweenRange(0,1);
+				if(randomVencedor == 0) {
+					setJogadorSelected(getDroppedJogadores().get(i));
+					setPersonagemSelected(getDroppedPersonagens().get(i));
+				} else {
+					setJogadorSelected(getDroppedJogadores2().get(i));
+					setPersonagemSelected(getDroppedPersonagens2().get(i));
+				}
+				Partida partida = new Partida(getDroppedJogadores().get(i),getDroppedPersonagens().get(i),getDroppedJogadores2().get(i),getDroppedPersonagens2().get(i),getJogadorSelected(),getPersonagemSelected());
 				partidas.add(partida);
 				partida.Cadastrar();
 			}
 			Chave chave = new Chave(1, partidas);
 			chave.Cadastrar();
+			createSemiFinal(partidas);
 			saveMessage("Partida Criada com sucesso !", "Successful");
 		}else {
 			saveMessage("Por gentileza complete a formação das equipes e personagens !", "Warn");
 		}
 		
 		
+	}
+	public void createSemiFinal(List<Partida> partidas) {
+			Jogador jogador1;
+			Jogador jogador2;
+			Personagem personagem1;
+			Personagem personagem2;
+			
+			double randomVencedor1 = getRandomIntegerBetweenRange(0,1);
+			if(randomVencedor1 == 0) {
+				jogador1 = partidas.get(0).getJogadorVencedor();
+				personagem1 = partidas.get(0).getPersonagemVencedor();
+			} else {
+				jogador1 = partidas.get(1).getJogadorVencedor();
+				personagem1 = partidas.get(1).getPersonagemVencedor();
+			}
+			
+			double randomVencedor2 = getRandomIntegerBetweenRange(0,1);
+			if(randomVencedor2 == 0) {
+				jogador2 = partidas.get(2).getJogadorVencedor();
+				personagem2 = partidas.get(2).getPersonagemVencedor();
+			} else {
+				jogador2 = partidas.get(3).getJogadorVencedor();
+				personagem2 = partidas.get(3).getPersonagemVencedor();
+			}
+			Partida partida1 = new Partida(partidas.get(0).getJogadorVencedor(),partidas.get(0).getPersonagemVencedor(),partidas.get(1).getJogadorVencedor(),partidas.get(1).getPersonagemVencedor(),jogador1,personagem1);
+			partidasSemi.add(partida1);
+			partida1.Cadastrar();
+			
+			Partida partida2 = new Partida(partidas.get(2).getJogadorVencedor(),partidas.get(2).getPersonagemVencedor(),partidas.get(3).getJogadorVencedor(),partidas.get(3).getPersonagemVencedor(),jogador2,personagem2);
+			partidasSemi.add(partida2);
+			partida2.Cadastrar();
+			
+			Chave chave = new Chave(2, partidasSemi);
+			chave.Cadastrar();
+			createFinal(partidasSemi);
+	}
+	public void createFinal(List<Partida> partidas) {
+		Jogador jogador;
+		Personagem personagem;
+		
+		double randomVencedor = getRandomIntegerBetweenRange(0,1);
+		if(randomVencedor == 0) {
+			jogador = partidas.get(0).getJogadorVencedor();
+			personagem = partidas.get(0).getPersonagemVencedor();
+		} else {
+			jogador = partidas.get(1).getJogadorVencedor();
+			personagem = partidas.get(1).getPersonagemVencedor();
+		}
+		Partida partida = new Partida(partidas.get(0).getJogadorVencedor(),partidas.get(0).getPersonagemVencedor(),partidas.get(1).getJogadorVencedor(),partidas.get(1).getPersonagemVencedor(),jogador,personagem);
+		partidasFinal.add(partida);
+		partida.Cadastrar();
+
+		Chave chave = new Chave(3, partidasFinal);
+		chave.Cadastrar();
+}
+	public static double getRandomIntegerBetweenRange(double min, double max){
+	    double x = (int)(Math.random()*((max-min)+1))+min;
+	    return x;
 	}
     public void onCarDrop(DragDropEvent ddEvent) {
         Jogador jogador = ((Jogador) ddEvent.getData());
@@ -197,7 +293,15 @@ public class ChaveView implements Serializable {
         }
     }
     
-    public void removeJogador(Jogador j) {
+    public List<Partida> getPartidasFinal() {
+		return partidasFinal;
+	}
+
+	public void setPartidasFinal(List<Partida> partidasFinal) {
+		this.partidasFinal = partidasFinal;
+	}
+
+	public void removeJogador(Jogador j) {
     	droppedJogadores.remove(j);
         jogadores.add(j);
     }

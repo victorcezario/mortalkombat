@@ -27,7 +27,9 @@ public class Partida {
 	@OneToOne
 	private Personagem personagemB;
 	@OneToOne
-	private Jogador vencedor;
+	private Jogador jogadorVencedor;
+	@OneToOne
+	private Personagem personagemVencedor;
 	
 	public int getIdPartida() {
 		return idPartida;
@@ -58,24 +60,33 @@ public class Partida {
 	}
 	public void setPersonagemB(Personagem personagemB) {
 		this.personagemB = personagemB;
+
 	}
-	public Jogador getVencedor() {
-		return vencedor;
-	}
-	public void setVencedor(Jogador vencedor) {
-		this.vencedor = vencedor;
-	}
-	
 	public Partida() {
 		
 	}
 	
-	public Partida(Jogador jogadorA, Personagem personagemA, Jogador jogadorB, Personagem personagemB) {
+	
+	public Jogador getJogadorVencedor() {
+		return jogadorVencedor;
+	}
+	public void setJogadorVencedor(Jogador jogadorVencedor) {
+		this.jogadorVencedor = jogadorVencedor;
+	}
+	public Personagem getPersonagemVencedor() {
+		return personagemVencedor;
+	}
+	public void setPersonagemVencedor(Personagem personagemVencedor) {
+		this.personagemVencedor = personagemVencedor;
+	}
+	public Partida(Jogador jogadorA, Personagem personagemA, Jogador jogadorB, Personagem personagemB, Jogador jogadorVencedor, Personagem personagemVencedor) {
 		super();
 		this.jogadorA = jogadorA;
 		this.personagemA = personagemA;
 		this.jogadorB = jogadorB;
 		this.personagemB = personagemB;
+		this.jogadorVencedor = jogadorVencedor;
+		this.personagemVencedor = personagemVencedor;
 	}
 	public void Cadastrar() {
 		EntityManager entitymanager = manager.createEntityManager();
