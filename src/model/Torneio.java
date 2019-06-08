@@ -46,6 +46,13 @@ public class Torneio {
 	public void setJogadorVencedor(Jogador jogadorVencedor) {
 		this.jogadorVencedor = jogadorVencedor;
 	}
+	
+	public int getIdTorneio() {
+		return idTorneio;
+	}
+	public void setIdTorneio(int idTorneio) {
+		this.idTorneio = idTorneio;
+	}
 	public int Cadastrar() {
 		EntityManager entitymanager = manager.createEntityManager();
 		entitymanager.getTransaction().begin();

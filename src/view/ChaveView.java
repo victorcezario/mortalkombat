@@ -28,7 +28,7 @@ import model.*;
 @ManagedBean(name = "chaveView")
 @ViewScoped
 public class ChaveView implements Serializable {
-	public List<Chave> chaves = new ArrayList<>();;
+	public List<Chave> chaves = new ArrayList<>();
 	
 	public List<Jogador> jogadores = new ArrayList<>();
 	public List<Jogador> jogadoresA = new ArrayList<>();
@@ -169,38 +169,12 @@ public class ChaveView implements Serializable {
 			personagensA = new PersonagemController().ListarA();
 			personagensB = new PersonagemController().ListarB();
 			
-			droppedJogadores.add(jogadores.get(0));
-			droppedJogadores.add(jogadores.get(1));
-			droppedJogadores.add(jogadores.get(2));
-			droppedJogadores.add(jogadores.get(3));
-			
-			
-			droppedJogadores2.add(jogadores.get(4));
-			droppedJogadores2.add(jogadores.get(5));
-			droppedJogadores2.add(jogadores.get(6));
-			droppedJogadores2.add(jogadores.get(7));
-			
-			droppedPersonagens.add(personagens.get(0));
-			droppedPersonagens.add(personagens.get(1));
-			droppedPersonagens.add(personagens.get(2));
-			droppedPersonagens.add(personagens.get(3));
-			
-			
-			droppedPersonagens2.add(personagens.get(4));
-			droppedPersonagens2.add(personagens.get(5));
-			droppedPersonagens2.add(personagens.get(6));
-			droppedPersonagens2.add(personagens.get(7));
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
     }
 	
 	public String createPartida() {
-		System.out.println("A" + droppedJogadores.size());
-		System.out.println("B" + droppedJogadores2.size());
-		System.out.println("C" + droppedPersonagens.size());
-		System.out.println("D" + droppedPersonagens2.size());
 		if(droppedJogadores.size() == 4 && droppedJogadores2.size() == 4 && droppedPersonagens.size() == 4 && droppedPersonagens2.size() == 4) {
 			for(int i=0;i<4;i++) {
 				double randomVencedor = getRandomIntegerBetweenRange(0,1);
@@ -313,7 +287,7 @@ public class ChaveView implements Serializable {
         Personagem personagem = ((Personagem) ddEvent.getData());
         if(droppedPersonagens.size() < 4) {
 	        droppedPersonagens.add(personagem);
-	        personagens.remove(personagem);
+	        //personagens.remove(personagem);
         }
     }
     
@@ -321,7 +295,7 @@ public class ChaveView implements Serializable {
         Personagem personagem = ((Personagem) ddEvent.getData());
         if(droppedPersonagens2.size() < 4) {
 	        droppedPersonagens2.add(personagem);
-	        personagens.remove(personagem);
+	        //personagens.remove(personagem);
         }
     }
     

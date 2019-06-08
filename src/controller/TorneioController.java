@@ -19,7 +19,7 @@ public class TorneioController {
 		
 		TypedQuery<Torneio> query = null;
 		
-		query = entitymanager.createQuery("select c from Torneio c", Torneio.class);
+		query = entitymanager.createQuery("select c from Torneio c ORDER BY idTorneio DESC", Torneio.class);
 		return query.getResultList();
 	}
 	

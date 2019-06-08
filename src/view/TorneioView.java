@@ -1,5 +1,6 @@
 package view;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -13,8 +14,14 @@ import model.Torneio;
 @ViewScoped
 public class TorneioView {
 
-	public List<Torneio> torneios;
+	public List<Torneio> torneios = new ArrayList<>();
 	
+	public List<Torneio> getTorneios() {
+		return torneios;
+	}
+	public void setTorneios(List<Torneio> torneios) {
+		this.torneios = torneios;
+	}
 	@PostConstruct
     public void init() {
     	try {

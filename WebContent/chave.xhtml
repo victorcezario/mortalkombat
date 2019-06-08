@@ -55,9 +55,6 @@
         <p:outputPanel id="dropArea">
             <h:outputText value="Solte aqui !" rendered="#{empty chaveView.droppedJogadores}" style="font-size:24px;" />
             <p:dataTable id="selectedJogadorsTable" var="j" value="#{chaveView.droppedJogadores}" rendered="#{not empty chaveView.droppedJogadores}">
-                <p:column headerText="Id" style="background-color:#1e88e5;">
-                    <h:outputText value="#{j.idJogador}" />
-                </p:column>
  
                 <p:column headerText="Nome" style="background-color:#1e88e5;">
                     <h:outputText value="#{j.nome}" />
@@ -84,10 +81,6 @@
         <p:outputPanel id="dropArea2">
             <h:outputText value="Solte aqui !" rendered="#{empty chaveView.droppedJogadores2}" style="font-size:24px;" />
             <p:dataTable id="selectedJogadorsTable2" var="j" value="#{chaveView.droppedJogadores2}" rendered="#{not empty chaveView.droppedJogadores2}">
-                <p:column headerText="Id" style="background-color:#e53935">
-                    <h:outputText value="#{j.idJogador}" />
-                </p:column>
- 
                 <p:column headerText="Nome" style="background-color:#e53935">
                     <h:outputText value="#{j.nome}" />
                 </p:column>
@@ -128,16 +121,13 @@
                 <p:column headerText="Foto" width="70" style="background-color:#1e88e5;text-align: center;">
                 	<p:graphicImage name="images/personagens/#{p.idPersonagem}.png" class="personagem" style="height:50px;width:50px"/>          
                 </p:column>
-                <p:column headerText="Id" style="background-color:#1e88e5;text-align: center;" width="70">
-                    <h:outputText value="#{p.idPersonagem}" />
-                </p:column>
  
                 <p:column headerText="Nome" style="background-color:#1e88e5;text-align: center;" width="150">
                     <h:outputText value="#{p.nome}" />
                 </p:column>
 				
                 <p:column headerText="Remover" style="width:32px;background-color:#1e88e5;text-align: center;">
-                    <p:commandButton update=":jForm selectedPersonagensTable" action="#{chaveView.removePersonagem}" icon="pi pi-search">
+                    <p:commandButton update=":jForm selectedPersonagensTable" action="#{chaveView.removePersonagem(p)}" icon="pi pi-search">
                         <f:setPropertyActionListener value="#{p}" target="#{chaveView.selectedPersonagem}" />
                     </p:commandButton>
                 </p:column>
@@ -152,16 +142,13 @@
                   <p:column headerText="Foto" width="70" style="background-color:#e53935;text-align: center;">
                 	<p:graphicImage name="images/personagens/#{p.idPersonagem}.png" class="personagem" style="height:50px;width:50px"/>          
                 </p:column>
-                <p:column headerText="Id" style="background-color:#e53935;text-align: center;" width="70">
-                    <h:outputText value="#{p.idPersonagem}" />
-                </p:column>
  
                 <p:column headerText="Nome" style="background-color:#e53935;text-align: center;" width="150">
                     <h:outputText value="#{p.nome}" />
                 </p:column>
 				
                <p:column headerText="Remover" style="width:32px;background-color:#e53935;text-align: center;">
-                    <p:commandButton update=":jForm selectedPersonagensTable2" action="#{chaveView.removePersonagem}" icon="pi pi-search">
+                    <p:commandButton update=":jForm selectedPersonagensTable2" action="#{chaveView.removePersonagem(p)}" icon="pi pi-search">
                         <f:setPropertyActionListener value="#{p}" target="#{chaveView.selectedPersonagem}" />
                     </p:commandButton>
                 </p:column>
