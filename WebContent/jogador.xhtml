@@ -29,7 +29,7 @@ function refreshTable(){
 	</h:form>
 <div class="content">
 	<h3 style="font-family:'mortalkombat';text-align:center;font-size:20px">Jogadores</h3>
-	<p:dataTable id="jogadorTable" var="jogador" value="#{jogadorView.jogadores}">
+	<p:dataTable id="jogadorTable" var="jogador" value="#{MkView.jogadores}">
     <p:column headerText="Nome">
         <h:outputText value="#{jogador.nome}" />
     </p:column>
