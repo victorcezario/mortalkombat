@@ -5,21 +5,20 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
-	<title>Mortal Kombat - Page Title</title>
+	<title>Mortal Kombat - Index</title>
 	<h:outputStylesheet library="css" name="style.css" />
 
 </h:head>
 <h:body>
-
-<style>
-@import url('https://fonts.googleapis.com/css?family=Poppins');
-</style>
+<video autoplay="true" muted="true" loop="true" id="myVideo">
+  <source src="resources/video.mp4" type="video/mp4" />
+</video>
 	<h:form>
 		<p:growl id="messages" />
 		<p:menubar>
 			<p:menuitem value="Mortal Kombat" url="index.xhtml" style="font-family:'mortalkombat';color:rgb(225,170,1);font-size: 24px;"/>
 			<p:menuitem value="Inicio" url="index.xhtml" icon="fa fa-home" />
-			<p:menuitem value="Torneios" url="torneio.xhtml" icon="fa fa-tournament" />
+			<p:menuitem value="Torneios" url="torneio.xhtml" icon="fa fa-sitemap" />
 			<p:menuitem value="Personagens" url="personagem.xhtml" icon="fa fa-heart" />
 			<p:menuitem value="Jogadores" url="jogador.xhtml" icon="fa fa-group" />
 		</p:menubar>

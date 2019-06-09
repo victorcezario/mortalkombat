@@ -6,9 +6,20 @@ src: url("#{resource['css:mkmyth.eot?']}?#iefix") format('eot'),
      url("#{resource['css:mkmyth.ttf']}") format('truetype'),
      url("#{resource['css:mkmyth.svg#MortalKombatMythologies']}#WebSymbolsRegular") format('svg');
 }
-
+#myVideo {
+ 	position: fixed; 
+	right: 0; 
+	bottom: 0;
+	min-width: 100%; 
+	min-height: 100%;
+	width: auto; 
+	height: auto; 
+	z-index: -1000;
+	background-size: cover; 
+}
 body{
-	background-image: url("https://wallpapersite.com/images/pages/pic_w/2.jpg");
+	background-image: url("#{resource['images:bg.png']}");
+	background-color: rgb(0,0,0);
 	background-repeat: no-repeat;
   	background-position: center center;
   	background-size: cover;
@@ -17,7 +28,8 @@ body{
 .content{
 	padding: 10px 10px 10px 10px;
 	background-color: rgba(0,0,0,.4);
-	height:600px;
+	min-height:600px;
+	height:auto;
 	margin-top: 60px;
 	color:white;  
 	border-top: 5px solid #fbaa01;
@@ -55,7 +67,7 @@ body{
 	color: white;
 }
 .ui-dialog.ui-widget-content .ui-dialog-content{
-	background-color: rgba(78,78,78);
+	background-color: rgba(78,78,78,.9);
 	color: white;
 }
 .ui-menu.ui-widget a:hover{
@@ -75,11 +87,17 @@ body{
 	background-color: rgb(18,18,18);
 	border: none;
 }
+.ui-paginator .ui-paginator-page, .ui-paginator .ui-paginator-next, .ui-paginator .ui-paginator-last, .ui-paginator .ui-paginator-first, .ui-paginator .ui-paginator-prev{
+	color: white;
+}
+.ui-paginator .ui-paginator-next .ui-icon, .ui-paginator .ui-paginator-prev .ui-icon, .ui-paginator .ui-paginator-first .ui-icon, .ui-paginator .ui-paginator-last .ui-icon{
+	color: white;
+}
 .ui-column-title{
 	color: rgb(253,168,15);
 }
 .ui-widget-content{
-	background-color:rgba(58,58,58,0.7);
+	background-color:rgba(0,0,0,0.4);
 	color: white;
 	border: 1px solid #black;
 }
@@ -126,10 +144,25 @@ body{
  overflow: hidden;
  position: relative;
 }
-
+.ui-tree-horizontal{
+	background-color:rgba(0,0,0,0.3);
+	border:none;
+	border-top: 4px solid #fbaa01;
+}
 .ui-datatable thead th, .ui-datatable tbody td, .ui-datatable tfoot td, .ui-datatable tfoot th{
 	font-family:"mortalkombat";
 	text-shadow: none;
+}
+.ui-tree-horizontal .ui-treenode-parent .ui-treenode-content {
+	color: white;
+}
+.ui-tree-horizontal .ui-treenode-leaf .ui-treenode-content{
+	color: white;
+}
+
+.ui-tree-horizontal .ui-treenode-parent .ui-treenode-content{
+	border:none;
+	border-right: 2px solid #fbaa01;
 }
 ::-webkit-scrollbar {
 display: none;
