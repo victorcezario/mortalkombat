@@ -28,38 +28,29 @@ import model.*;
 @ManagedBean(name = "chaveView")
 @ViewScoped
 public class ChaveView implements Serializable {
+	
 	public List<Chave> chaves = new ArrayList<>();
 	
 	public List<Jogador> jogadores = new ArrayList<>();
-	public List<Jogador> jogadoresA = new ArrayList<>();
-	public List<Jogador> jogadoresB = new ArrayList<>();
-	public Jogador jogadorSelected = new Jogador();
-	public Personagem personagemSelected = new Personagem();
-	public List<Partida> tableClassificacao = new ArrayList<>();
+
 	public List<Personagem> personagens = new ArrayList<>();
-	public List<Personagem> personagensA = new ArrayList<>();
-	public List<Personagem> personagensB = new ArrayList<>();
+
 	
 	public List<Partida> partidas = new ArrayList<>();
 	public List<Partida> partidasSemi = new ArrayList<>();
 	public List<Partida> partidasFinal = new ArrayList<>();
 	
-	public List<Jogador> droppedJogadores = new ArrayList<>();
-	
 	public Jogador selectedJogador = new Jogador();
-	
-	public List<Jogador> droppedJogadores2 = new ArrayList<>();
-	
 	public Jogador selectedJogador2 = new Jogador();
 	
-	public List<Personagem> droppedPersonagens = new ArrayList<>();
+	public List<Jogador> droppedJogadores = new ArrayList<>();
+	public List<Jogador> droppedJogadores2 = new ArrayList<>();
 	
 	public Personagem selectedPersonagem = new Personagem();
-	
-	public List<Personagem> droppedPersonagens2 = new ArrayList<>();
-	
 	public Personagem selectedPersonagem2  = new Personagem();
 	
+	public List<Personagem> droppedPersonagens = new ArrayList<>();
+	public List<Personagem> droppedPersonagens2 = new ArrayList<>();
 	 
     private String message;
  
@@ -98,54 +89,8 @@ public class ChaveView implements Serializable {
 		this.partidasSemi = partidasSemi;
 	}
 
-	public Personagem getPersonagemSelected() {
-		return personagemSelected;
-	}
-
-	public void setPersonagemSelected(Personagem personagemSelected) {
-		this.personagemSelected = personagemSelected;
-	}
-
-	public Jogador getJogadorSelected() {
-		return jogadorSelected;
-	}
-
-	public void setJogadorSelected(Jogador jogadorSelected) {
-		this.jogadorSelected = jogadorSelected;
-	}
-
 	public List<Jogador> getJogadores() {
 		return jogadores;
-	}
-	
-	public List<Jogador> getJogadoresA() {
-		return jogadoresA;
-	}
-	public List<Jogador> getJogadoresB() {
-		return jogadoresB;
-	}
-    public List<Partida> getTableClassificacao() {
-		return tableClassificacao;
-	}
-
-	public void setTableClassificacao(List<Partida> tableClassificacao) {
-		this.tableClassificacao = tableClassificacao;
-	}
-
-	public List<Personagem> getPersonagensA() {
-		return personagensA;
-	}
-
-	public void setPersonagensA(List<Personagem> personagensA) {
-		this.personagensA = personagensA;
-	}
-
-	public List<Personagem> getPersonagensB() {
-		return personagensB;
-	}
-
-	public void setPersonagensB(List<Personagem> personagensB) {
-		this.personagensB = personagensB;
 	}
 
 	public List<Partida> getPartidas() {
@@ -161,13 +106,7 @@ public class ChaveView implements Serializable {
     	try {
     		
 			jogadores = new JogadorController().Listar();
-			personagens = new PersonagemController().Listar();
-			
-			jogadoresA = new JogadorController().ListarA();
-			jogadoresB = new JogadorController().ListarB();
-			
-			personagensA = new PersonagemController().ListarA();
-			personagensB = new PersonagemController().ListarB();
+			personagens = new PersonagemController().Listar();	
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -175,32 +114,32 @@ public class ChaveView implements Serializable {
     }
 	
 	public String createPartida() {
-		if(droppedJogadores.size() == 4 && droppedJogadores2.size() == 4 && droppedPersonagens.size() == 4 && droppedPersonagens2.size() == 4) {
-			for(int i=0;i<4;i++) {
-				double randomVencedor = getRandomIntegerBetweenRange(0,1);
-				if(randomVencedor == 0) {
-					setJogadorSelected(getDroppedJogadores().get(i));
-					setPersonagemSelected(getDroppedPersonagens().get(i));
-				} else {
-					setJogadorSelected(getDroppedJogadores2().get(i));
-					setPersonagemSelected(getDroppedPersonagens2().get(i));
+			if(droppedJogadores.size() == 4 && droppedJogadores2.size() == 4 && droppedPersonagens.size() == 4 && droppedPersonagens2.size() == 4) {
+				 
+				for(int i=0;i<4;i++) {
+					double randomVencedor = getRandomIntegerBetweenRange(0,1);
+					if(randomVencedor == 0) {
+						setSelectedJogador(getDroppedJogadores().get(i));
+						setSelectedPersonagem(getDroppedPersonagens().get(i));
+					} else {
+						setSelectedJogador(getDroppedJogadores2().get(i));
+						setSelectedPersonagem(getDroppedPersonagens2().get(i));
+					}
+					Partida partida = new Partida(getDroppedJogadores().get(i),getDroppedPersonagens().get(i),getDroppedJogadores2().get(i),getDroppedPersonagens2().get(i),getSelectedJogador(),getSelectedPersonagem());
+					partidas.add(partida);
+					partida.Cadastrar();
 				}
-				Partida partida = new Partida(getDroppedJogadores().get(i),getDroppedPersonagens().get(i),getDroppedJogadores2().get(i),getDroppedPersonagens2().get(i),getJogadorSelected(),getPersonagemSelected());
-				partidas.add(partida);
-				partida.Cadastrar();
-			}
-			Chave chave = new Chave(1, partidas);
-			chave.Cadastrar();
-			chaves.add(chave);
-			createSemiFinal(partidas);
-			saveMessage("Partida Criada com sucesso !", "Successful");
-			return "score.xhtml";
-		}else {
-			saveMessage("Por gentileza complete a formaÃ§Ã£o das equipes e personagens !", "Warn");
-			return null;
-		}
-		
-		
+				Chave chave = new Chave(1, partidas);
+				chave.Cadastrar();
+				chaves.add(chave);
+				createSemiFinal(partidas);
+
+				saveMessage("Partida criada com sucesso!", "Successful");
+				return "score.xhtml";
+			} else {
+				saveMessage("Por gentileza, complete a formação das equipes e personagens!", "Warn");
+				return null;
+			}	
 	}
 	public void createSemiFinal(List<Partida> partidas) {
 			Jogador jogador1;
@@ -268,11 +207,16 @@ public class ChaveView implements Serializable {
 	    return x;
 	}
     public void onCarDrop(DragDropEvent ddEvent) {
-        Jogador jogador = ((Jogador) ddEvent.getData());
-        if(droppedJogadores.size() < 4) {
-        	droppedJogadores.add(jogador);
-            jogadores.remove(jogador);
-        }
+    	if (!ddEvent.getDragId().contains("Personagens")) {
+	        Jogador jogador = ((Jogador) ddEvent.getData());
+	        if(droppedJogadores.size() < 4) {
+	        	droppedJogadores.add(jogador);
+	            jogadores.remove(jogador);
+    		
+    	} else {
+    		saveMessage("É um personagem!", "Warn");
+	        } 
+    	}
     }
     
     public void onCarDrop2(DragDropEvent ddEvent) {
@@ -328,13 +272,6 @@ public class ChaveView implements Serializable {
         this.jogadores = jogadores;
     }   
     
-    public void setjogadoresA(List<Jogador> jogadoresA) {
-        this.jogadoresA = jogadoresA;
-    }  
-    
-    public void setjogadoresB(List<Jogador> jogadoresB) {
-        this.jogadoresB = jogadoresB;
-    }
 
 	public List<Jogador> getDroppedJogadores() {
 		return droppedJogadores;
@@ -370,14 +307,6 @@ public class ChaveView implements Serializable {
 
 	public void setJogadores(List<Jogador> jogadores) {
 		this.jogadores = jogadores;
-	}
-
-	public void setJogadoresA(List<Jogador> jogadoresA) {
-		this.jogadoresA = jogadoresA;
-	}
-
-	public void setJogadoresB(List<Jogador> jogadoresB) {
-		this.jogadoresB = jogadoresB;
 	}
 
 	public List<Personagem> getDroppedPersonagens() {
@@ -418,7 +347,6 @@ public class ChaveView implements Serializable {
 
 	public void setChaves(List<Chave> chaves) {
 		this.chaves = chaves;
-	}  
-	
+	} 
     
 }

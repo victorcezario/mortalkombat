@@ -35,23 +35,5 @@ public class PersonagemController {
 		
 		return query.getResultList();
 	}
-	public List<Personagem> ListarA() {
-		EntityManager entitymanager = manager.createEntityManager();
-		
-		TypedQuery<Personagem> query = null;
-		
-		query = entitymanager.createQuery("select c from Personagem c", Personagem.class).setFirstResult(0).setMaxResults(4);
-		
-		return query.getResultList();
-	}
-	
-	public List<Personagem> ListarB() {
-		EntityManager entitymanager = manager.createEntityManager();
-		
-		TypedQuery<Personagem> query = null;
-		
-		query = entitymanager.createQuery("select c from Personagem c", Personagem.class).setFirstResult(4).setMaxResults(4);
-		
-		return query.getResultList();
-	}
+
 }

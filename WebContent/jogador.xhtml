@@ -5,7 +5,7 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
-	<title>Mortal Kombat - Page Title</title>
+	<title>Mortal Kombat - Jogadores</title>
 	<h:outputStylesheet library="css" name="style.css" />
 </h:head>
 <h:body>
@@ -29,7 +29,7 @@ function refreshTable(){
 	</h:form>
 <div class="content">
 	<h3 style="font-family:'mortalkombat';text-align:center;font-size:20px">Jogadores</h3>
-	<p:dataTable id="jogadorTable" var="jogador" value="#{MkView.jogadores}">
+	<p:dataTable id="jogadorTable" var="jogador" value="#{jogadorView.jogadores}">
     <p:column headerText="Nome">
         <h:outputText value="#{jogador.nome}" />
     </p:column>
