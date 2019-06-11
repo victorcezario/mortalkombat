@@ -9,7 +9,7 @@ import javax.faces.bean.ViewScoped;
 import controller.PersonagemController;
 import model.Personagem;
 
-@ManagedBean(name = "PersonagemView")
+@ManagedBean(name = "personagemView")
 @ViewScoped
 public class PersonagemView {
 	private List<Personagem> personagens;
@@ -22,12 +22,10 @@ public class PersonagemView {
 	
 	@PostConstruct
 	public void init() {
-
 		try {
 			personagens = new PersonagemController().Listar();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 }

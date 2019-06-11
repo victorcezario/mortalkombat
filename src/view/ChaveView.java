@@ -134,7 +134,7 @@ public class ChaveView implements Serializable {
 				chaves.add(chave);
 				createSemiFinal(partidas);
 
-				saveMessage("Partida criada com sucesso!", "Successful");
+				//saveMessage("Partida criada com sucesso!", "Successful");
 				return "score.xhtml";
 			} else {
 				saveMessage("Por gentileza, complete a formação das equipes e personagens!", "Warn");
@@ -207,16 +207,11 @@ public class ChaveView implements Serializable {
 	    return x;
 	}
     public void onCarDrop(DragDropEvent ddEvent) {
-    	if (!ddEvent.getDragId().contains("Personagens")) {
-	        Jogador jogador = ((Jogador) ddEvent.getData());
-	        if(droppedJogadores.size() < 4) {
-	        	droppedJogadores.add(jogador);
-	            jogadores.remove(jogador);
-    		
-    	} else {
-    		saveMessage("É um personagem!", "Warn");
-	        } 
-    	}
+        Jogador jogador = ((Jogador) ddEvent.getData());
+        if(droppedJogadores.size() < 4) {
+        	droppedJogadores.add(jogador);
+            jogadores.remove(jogador);
+        }
     }
     
     public void onCarDrop2(DragDropEvent ddEvent) {
